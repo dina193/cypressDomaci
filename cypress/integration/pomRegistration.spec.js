@@ -7,12 +7,14 @@ const faker = require("faker");
 
 describe('POM registration', () => {
 
-    let emailMissingAtSign = 'dina729gmail.com';
-    let emailMissingDotCom = 'dina729@gmail';
-    let emailMissingDot = 'dina729@gmailcom';
-    let email2Dots = 'dina729@gmail..com';
-    let emailDotBeforeAt = 'dina729.@gmail.com';
-    let takenEmail = 'dina1@test.com';
+    let invalidUserData = {
+        emailMissingAtSign: 'dina729gmail.com',
+        emailMissingDotCom: 'dina729@gmail',
+        emailMissingDot: 'dina729@gmailcom',
+        email2Dots: 'dina729@gmail..com',
+        emailDotBeforeAt: 'dina729.@gmail.com',
+        takenEmail: 'dina1@test.com'
+    }
     
     let userData = {
         randomFirstName: faker.name.findName(),
@@ -55,31 +57,31 @@ describe('POM registration', () => {
 
     it('Register with invalid email address-missing @', () => {
         header.registerBtn.click();
-        authRegister.register(userData.randomFirstName, userData.randomLastName, emailMissingAtSign, userData.randomPassword, userData.randomPassword);
+        authRegister.register(userData.randomFirstName, userData.randomLastName, invalidUserData.emailMissingAtSign, userData.randomPassword, userData.randomPassword);
         cy.url().should('contains', '/register');
     });
 
     it('Register with invalid email address-missing .com', () => {
         header.registerBtn.click();
-        authRegister.register(userData.randomFirstName, userData.randomLastName, emailMissingDotCom, userData.randomPassword, userData.randomPassword);
+        authRegister.register(userData.randomFirstName, userData.randomLastName, invalidUserData.emailMissingDotCom, userData.randomPassword, userData.randomPassword);
         cy.url().should('contains', '/register');
     });
 
     it('Register with invalid email address-missing .', () => {
         header.registerBtn.click();
-        authRegister.register(userData.randomFirstName, userData.randomLastName, emailMissingDot, userData.randomPassword, userData.randomPassword);
+        authRegister.register(userData.randomFirstName, userData.randomLastName, invalidUserData.emailMissingDot, userData.randomPassword, userData.randomPassword);
         cy.url().should('contains', '/register');
     });
 
     it('Register with invalid email address-contains two .', () => {
         header.registerBtn.click();
-        authRegister.register(userData.randomFirstName, userData.randomLastName, email2Dots, userData.randomPassword, userData.randomPassword);
+        authRegister.register(userData.randomFirstName, userData.randomLastName, invalidUserData.email2Dots, userData.randomPassword, userData.randomPassword);
         cy.url().should('contains', '/register');
     });
 
     it('Register with invalid email address-contains . before @', () => {
         header.registerBtn.click();
-        authRegister.register(userData.randomFirstName, userData.randomLastName, emailDotBeforeAt, userData.randomPassword, userData.randomPassword);
+        authRegister.register(userData.randomFirstName, userData.randomLastName, invalidUserData.emailDotBeforeAt, userData.randomPassword, userData.randomPassword);
         cy.url().should('contains', '/register');
     });
 
@@ -126,7 +128,7 @@ describe('POM registration', () => {
 
     it('Register with already taken email address', () => {
         header.registerBtn.click();
-        authRegister.register(userData.randomFirstName, userData.randomLastName, takenEmail, userData.randomPassword, userData.randomPassword);
+        authRegister.register(userData.randomFirstName, userData.randomLastName, invalidUserData.takenEmail, userData.randomPassword, userData.randomPassword);
         cy.url().should('contains', '/register');
     });
 
