@@ -1,0 +1,11 @@
+{
+    "validationMessages": {
+        "confMismatch": "The password confirmation does not match.",
+        "badCredentials": "Bad Credentials",
+        "emailTaken": "The email has already been taken.",
+        "invalidEmail": "The email must be a valid email address.",
+        "shortPass": "The password must be at least 8 characters.",
+        "invalidPassFormat": "The password format is invalid.",
+        "termsMustBeAccepted": "The terms and conditions must be accepted."
+    }
+}

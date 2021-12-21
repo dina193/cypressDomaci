@@ -11,8 +11,12 @@ class AuthLogin {
         return cy.get("button[type='submit']");
     }
 
-    get logoutBtn() {
-        return cy.get("a[role='button ']");
+    get errorMsg() {
+        return cy.get(".alert-danger");
+    }
+
+    get loginPageHeading() {
+        return cy.get("h1");
     }
 
     login(email, password) {

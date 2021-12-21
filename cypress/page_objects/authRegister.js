@@ -27,72 +27,30 @@ class AuthRegister {
         return cy.get("button[type='submit']");
     }
 
+    get errorMessage() {
+        return cy.get(".alert-danger");
+    }
+
+    get registerPageHeading() {
+        return cy.get("h1");
+    }
+
     register(firstName, lastName, email, password, confirmedPass) {
-        this.firstNameInput.clear().type(firstName);
-        this.lastNameInput.clear().type(lastName);
-        this.emailInput.clear().type(email);
-        this.passwordInput.clear().type(password);
-        this.confirmedPasswordInput.clear().type(confirmedPass);
-        this.checkboxForTerms.uncheck().click();
-        this.submitBtn.click();
-    }
-
-    registerWithoutName(lastName, email, pass, confirmedPass) {
-        this.lastNameInput.clear().type(lastName);
-        this.emailInput.clear().type(email);
-        this.passwordInput.clear().type(pass);
-        this.confirmedPasswordInput.clear().type(confirmedPass);
-        this.checkboxForTerms.uncheck().click();
-        this.submitBtn.click();
-    }
-
-    registerWithoutLastName(firstName, email, pass, confirmedPass) {
-        this.firstNameInput.clear().type(firstName);
-        this.lastNameInput.clear();
-        this.emailInput.clear().type(email);
-        this.passwordInput.clear().type(pass);
-        this.confirmedPasswordInput.clear().type(confirmedPass);
-        this.checkboxForTerms.uncheck().click();
-        this.submitBtn.click();
-    }
-
-    registerWithoutEmail(firstName, lastName, pass, confirmedPass) {
-        this.firstNameInput.clear().type(firstName);
-        this.lastNameInput.clear().type(lastName);
-        this.emailInput.clear();
-        this.passwordInput.clear().type(pass);
-        this.confirmedPasswordInput.clear().type(confirmedPass);
-        this.checkboxForTerms.uncheck().click();
-        this.submitBtn.click();
-    }
-
-    registerWithoutPassAndPassConf(firstName, lastName, email) {
-        this.firstNameInput.clear().type(firstName);
-        this.lastNameInput.clear().type(lastName);
-        this.emailInput.clear().type(email);
-        this.passwordInput.clear();
-        this.confirmedPasswordInput.clear();
-        this.checkboxForTerms.uncheck().click();
-        this.submitBtn.click();
-    }
-
-    registerWithoutPassConf(firstName, lastName, email, pass) {
-        this.firstNameInput.clear().type(firstName);
-        this.lastNameInput.clear().type(lastName);
-        this.emailInput.clear().type(email);
-        this.passwordInput.clear().type(pass);
-        this.confirmedPasswordInput.clear();
-        this.checkboxForTerms.uncheck().click();
+        this.firstNameInput.type(firstName);
+        this.lastNameInput.type(lastName);
+        this.emailInput.type(email);
+        this.passwordInput.type(password);
+        this.confirmedPasswordInput.type(confirmedPass);
+        this.checkboxForTerms.check();
         this.submitBtn.click();
     }
 
     uncheckedTerms(firstName, lastName, email, pass, confirmedPass) {
-        this.firstNameInput.clear().type(firstName);
-        this.lastNameInput.clear().type(lastName);
-        this.emailInput.clear().type(email);
-        this.passwordInput.clear().type(pass);
-        this.confirmedPasswordInput.clear().type(confirmedPass);
-        this.checkboxForTerms.uncheck();
+        this.firstNameInput.type(firstName);
+        this.lastNameInput.type(lastName);
+        this.emailInput.type(email);
+        this.passwordInput.type(pass);
+        this.confirmedPasswordInput.type(confirmedPass);
         this.submitBtn.click();
     }
 }
