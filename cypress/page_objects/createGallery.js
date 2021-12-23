@@ -31,11 +31,26 @@ class CreateGallery {
         return cy.get("button[type='submit']").contains('Cancel');
     }
 
+    get createGalleryPageHeading() {
+        return cy.get("h1").contains("Create Gallery");
+    }
+
+    get errorMessage() {
+        return cy.get(".alert-danger");
+    }
+
     createGalleryWithOneImg(title, description, imageUrl) {
-        this.titleInput.clear().type(title);
-        this.descriptionInput.clear().type(description);
-        this.imageInput.clear().type(imageUrl);
+        this.titleInput.type(title);
+        this.descriptionInput.type(description);
+        this.imageInput.type(imageUrl);
         this.submitBtn.click();
+    }
+
+    cancelCreatingGallery(title, description, imageUrl) {
+        this.titleInput.type(title);
+        this.descriptionInput.type(description);
+        this.imageInput.type(imageUrl);
+        this.cancelBtn.click();
     }
 }
 

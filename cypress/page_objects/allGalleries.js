@@ -11,8 +11,12 @@ class AllGalleries {
         return cy.get(".btn-custom");
     }
 
-    get gallery() {
+    get galleryCard() {
         return cy.get(".cell");
+    }
+
+    get allGalleriesPageHeading() {
+        return cy.get("h1");
     }
 
     filterGalleries(searchWord) {
@@ -20,8 +24,12 @@ class AllGalleries {
         this.filterBtn.click();
     }
 
-    getGalleryTitle() {
-        this.gallery.find(".box-title");
+    getGalleryTitle(title) {
+       return this.galleryCard.find("h2").contains(title);
+    }
+
+    getGalleryAuthor(author) {
+        return this.galleryCard.find("p").contains(author);
     }
 }
 
