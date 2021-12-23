@@ -20,8 +20,8 @@ class AuthLogin {
     }
 
     login(email, password) {
-        this.emailInput.clear().type(email);
-        this.passwordInput.clear().type(password);
+        this.emailInput.type(email);
+        this.passwordInput.type(password);
         this.submitBtn.click();
     }
 }

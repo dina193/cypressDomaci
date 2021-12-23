@@ -6,6 +6,10 @@
         "invalidEmail": "The email must be a valid email address.",
         "shortPass": "The password must be at least 8 characters.",
         "invalidPassFormat": "The password format is invalid.",
-        "termsMustBeAccepted": "The terms and conditions must be accepted."
+        "termsMustBeAccepted": "The terms and conditions must be accepted.",
+        "shortTitle": "The title must be at least 2 characters.",
+        "longTitle": "The title may not be greater than 255 characters.",
+        "longDescription": "The description may not be greater than 1000 characters.",
+        "invalidImgFormat": "Wrong format of image"
     }
 }

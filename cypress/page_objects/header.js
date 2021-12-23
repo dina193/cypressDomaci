@@ -15,6 +15,10 @@ class Header {
         return cy.get("a[href='/']").eq(1);
     }
 
+    get myGalleriesBtn() {
+        return cy.get("a[href='/my-galleries']");
+    }
+
     get logoutBtn() {
         return cy.get("a[role='button ']");
     }
