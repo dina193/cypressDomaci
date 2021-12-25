@@ -1,3 +1,7 @@
 {
-    "baseUrl": "https://gallery-app.vivifyideas.com/"
+    "baseUrl": "https://gallery-app.vivifyideas.com/",
+    "env": {
+        "validUserEmail": "dina1@test.com",
+        "validUserPass": "dinatest1"
+    }
 }
