@@ -48,8 +48,19 @@ describe('POM login', () => {
     });
 
     it('Login with invalid password', () => {
+        cy.intercept({
+            method: 'POST',
+            url: 'https://gallery-api.vivifyideas.com/api/auth/login'
+        }).as('loginWithInvalidPass');
+
         authLogin.loginPageHeading.should('be.visible');
         authLogin.login(validEmail, userData.randomPassword);
+
+        cy.wait('@loginWithInvalidPass').then((interception) => {
+            expect(interception.response.statusCode).eq(401);
+            expect(interception.response.body.error).to.have.string('Unauthorized');
+        });
+
         authLogin.errorMsg.should('be.visible');
         authLogin.errorMsg.should('have.text', validationMessages.badCredentials);
         authLogin.errorMsg.should('have.css', 'background-color', 'rgb(248, 215, 218)');
@@ -58,8 +69,18 @@ describe('POM login', () => {
     });
 
     it('Login with invalid email address', () => {
+        cy.intercept({
+            method: 'POST',
+            url: 'https://gallery-api.vivifyideas.com/api/auth/login'
+        }).as('loginWithInvalidEmail');
+
         authLogin.loginPageHeading.should('be.visible');
         authLogin.login(userData.randomEmail, validPass);
+
+        cy.wait('@loginWithInvalidEmail').then((interception) => {
+            expect(interception.response.statusCode).eq(401);
+            expect(interception.response.body.error).to.have.string('Unauthorized');
+        });
         authLogin.errorMsg.should('be.visible');
         authLogin.errorMsg.should('have.text', validationMessages.badCredentials);
         authLogin.errorMsg.should('have.css', 'background-color', 'rgb(248, 215, 218)');
@@ -68,8 +89,18 @@ describe('POM login', () => {
     });
 
     it('Login with invalid email address and invalid password', () => {
+        cy.intercept({
+            method: 'POST',
+            url: 'https://gallery-api.vivifyideas.com/api/auth/login'
+        }).as('invalidLogin');
+
         authLogin.loginPageHeading.should('be.visible');
         authLogin.login(userData.randomEmail, userData.randomPassword);
+
+        cy.wait('@invalidLogin').then((interception) => {
+            expect(interception.response.statusCode).eq(401);
+            expect(interception.response.body.error).to.have.string('Unauthorized');
+        });
         authLogin.errorMsg.should('be.visible');
         authLogin.errorMsg.should('have.text', validationMessages.badCredentials);
         authLogin.errorMsg.should('have.css', 'background-color', 'rgb(248, 215, 218)');
@@ -95,8 +126,17 @@ describe('POM login', () => {
     });
 
     it('Login with valid credentials', () => {
+        cy.intercept({
+            method: 'POST',
+            url: 'https://gallery-api.vivifyideas.com/api/auth/login'
+        }).as('login')
+
         authLogin.loginPageHeading.should('be.visible').and('have.text', 'Please login');
         authLogin.login(validEmail, validPass);
+
+        cy.wait('@login').then((interception) => {
+            expect(interception.response.statusCode).eq(200);
+        });
         authLogin.errorMsg.should('not.exist');
         cy.url().should('not.include', '/login');
         header.loginBtn.should('not.exist');
@@ -104,10 +144,19 @@ describe('POM login', () => {
     });
 
     it('Logout', () => {
+        cy.intercept({
+            method: 'POST',
+            url: 'https://gallery-api.vivifyideas.com/api/auth/logout'
+        }).as('logout');
+
         authLogin.login(validEmail, validPass);
         cy.url().should('not.contains', '/login');
         header.loginBtn.should('not.exist');
         header.logoutBtn.should('be.visible').click();
+
+        cy.wait('@logout').then((interception) => {
+            expect(interception.response.statusCode).eq(200);
+        });
         authLogin.loginPageHeading.should('be.visible').and('have.text', 'Please login');
     });
 });
